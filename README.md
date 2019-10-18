@@ -5,7 +5,7 @@ Written by Dan Oates (WPI Class of 2020)
 ### Description
 H-bridges are used primarily to bidirectionally drive DC motors. This class controls H-bridges via three control lines:
 
-- pwm: PWM output to control duty cycle (connect to enable line)
+- pwm: PWM output to control duty cycle
 - fwd: Forward enable digital output
 - rev: Reverse enable digital output
 

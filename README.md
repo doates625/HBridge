@@ -9,7 +9,7 @@ H-bridges are used primarily to bidirectionally drive DC motors. This class cont
 - fwd: Forward enable digital output
 - rev: Reverse enable digital output
 
-Braking is done by writing both the fwd and rev lines low.
+Braking is done by setting a zero duty cycle and writing both the fwd and rev lines low.
 
 ### Dependencies
 - [CppUtil](https://github.com/doates625/CppUtil.git)

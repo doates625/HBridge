@@ -29,7 +29,7 @@ HBridge::HBridge(PwmOut* pwm, DigitalOut* fwd, DigitalOut* rev, float vcc)
  */
 void HBridge::set_voltage(float v_cmd)
 {
-	v_cmd = Util::clamp(v_cmd, -vcc, +vcc);
+	v_cmd = CppUtil::clamp(v_cmd, -vcc, +vcc);
 	pwm->write(fabsf(v_cmd) * vcc_inv);
 	if (v_cmd > 0.0f)
 	{

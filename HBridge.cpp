@@ -33,13 +33,13 @@ HBridge::HBridge(PwmOut* pwm, DigitalOut* fwd, DigitalOut* rev, float vcc)
  * This constructor dynamically allocates the IO interfaces and deletes them
  * on destruction.
  */
-HBridge::HBridge(pin_t pin_pwm, pin_t pin_fwd, pin_t pin_rev, float vcc)
+HBridge::HBridge(pin_t pin_pwm, pin_t pin_fwd, pin_t pin_rev, float vcc) :
+HBridge(
+	new PwmOut(pin_pwm),
+	new DigitalOut(pin_fwd),
+	new DigitalOut(pin_rev),
+	vcc)
 {
-	this->pwm = new PwmOut(pin_pwm);
-	this->fwd = new DigitalOut(pin_fwd);
-	this->rev = new DigitalOut(pin_rev);
-	this->vcc = vcc;
-	this->vcc_inv = 1.0f / vcc;
 	this->dynamic_io = true;
 }
 

@@ -4,6 +4,7 @@
  */
 #include "HBridge.h"
 #include <CppUtil.h>
+using Platform::pin_t;
 
 /**
  * @brief Constructs H-bridge interface
@@ -19,6 +20,42 @@ HBridge::HBridge(PwmOut* pwm, DigitalOut* fwd, DigitalOut* rev, float vcc)
 	this->rev = rev;
 	this->vcc = vcc;
 	this->vcc_inv = 1.0f / vcc;
+	this->dynamic_io = false;
+}
+
+/**
+ * @brief Constructs H-bridge interface
+ * @param pin_pwm ID of pwm output pin
+ * @param pin_fwd ID of forward enable output
+ * @param pin_rev ID of reverse enable output
+ * @param vcc Supply voltage [V]
+ * 
+ * This constructor dynamically allocates the IO interfaces and deletes them
+ * on destruction.
+ */
+HBridge::HBridge(pin_t pin_pwm, pin_t pin_fwd, pin_t pin_rev, float vcc)
+{
+	this->pwm = new PwmOut(pin_pwm);
+	this->fwd = new DigitalOut(pin_fwd);
+	this->rev = new DigitalOut(pin_rev);
+	this->vcc = vcc;
+	this->vcc_inv = 1.0f / vcc;
+	this->dynamic_io = true;
+}
+
+/**
+ * @brief Destructs H-bridge object
+ * 
+ * Deletes IO interfaces if they were created with dynamic memory.
+ */
+HBridge::~HBridge()
+{
+	if (dynamic_io)
+	{
+		delete pwm;
+		delete fwd;
+		delete rev;
+	}
 }
 
 /**

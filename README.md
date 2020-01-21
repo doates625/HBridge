@@ -16,6 +16,3 @@ Braking is done by setting a zero duty cycle and writing both the fwd and rev li
 - [Platform](https://github.com/doates625/Platform.git)
 - [DigitalOut](https://github.com/doates625/DigitalOut.git)
 - [PwmOut](https://github.com/doates625/PwmOut.git)
-
-### References
-- [Text](link)
